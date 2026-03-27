@@ -107,7 +107,7 @@ products:
             - title: FIPS for Ubuntu
               description: Secure Linux for government
               url: /security/fips
-            - title: WSL
+            - title: Ubuntu on WSL
               description: Windows Subsystem for Linux
               url: /wsl
             - title: Multipass
@@ -1011,9 +1011,9 @@ download_ubuntu:
     - title: Windows & macOS
       primary_links:
         - links:
-            - title: WSL
+            - title: Ubuntu on WSL
               description: Windows Subsystem for Linux
-              url: /wsl
+              url: /download/wsl
             - title: Multipass
               description: Ubuntu VMs for Windows and macOS
               url: https://canonical.com/multipass
