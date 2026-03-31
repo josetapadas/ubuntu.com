@@ -226,9 +226,9 @@
         <hr class="p-rule" />
         <div class="col">
           <h3>
-            Classic Ubuntu Server
+            Ubuntu Server
             <br class="u-hide--small" />
-            or new Ubuntu Core
+            or Ubuntu Core
           </h3>
         </div>
         <div class="col">
@@ -272,7 +272,7 @@
     </div>
   </section>
 
-
+<div class="p-section">
   {%- call(slot) vf_tiered_list(is_description_full_width_on_desktop=false, is_list_full_width_on_tablet=true) -%}
     {%- if slot == 'title' -%}
       <h2 class="p-heading--3">Security matters most</h2>
@@ -349,6 +349,7 @@
       <p>No other embedded Linux comes close to Canonical's commitment to long term security.</p>
     {%- endif -%}
   {%- endcall -%}
+</div>
 
   <section class="p-section">
     <div class="p-section--shallow">
