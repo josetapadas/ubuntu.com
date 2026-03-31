@@ -415,7 +415,8 @@ desktop/tenders/contact-us/?: "/desktop/contact-us"
 desktop/tenders/thank-you/?: "/desktop/thank-you"
 desktop/ubuntu-kylin.*: "https://cn.ubuntu.com/desktop/"
 desktop/why.*/?: "/desktop"
-desktop/wsl: "/wsl"
+desktop/wsl/?: "/wsl"
+desktop/wsl/install/?: "/wsl/install"
 desktop/features: "/desktop"
 desktopedition/?: "/desktop"
 developer/?: "/desktop/developers"
@@ -1185,7 +1186,7 @@ security/cve/sitemap(?P<suffix>.*).xml: /security/cves/sitemap{suffix}.xml
 # Shop redirects
 advantage/purchase-account: "/account/purchase-account"
 advantage/customer-info/(?P<account_id>.*): "/account/customer-info/{account_id}"
-advantage/customer-info: "/account/customer-info"
+advantage/customer-info: "/account/custome-info"
 advantage/customer-info-anon: "/account/customer-info-anon"
 advantage/purchases/(?P<purchase_id>.*): /account/purchases/{purchase_id}
 advantage/(?P<tx_type>.*)/(?P<tx_id>.*)/invoices/(?P<invoice_id>.*): "/account/{tx_type}/{tx_id}/invoices/{invoice_id}"
