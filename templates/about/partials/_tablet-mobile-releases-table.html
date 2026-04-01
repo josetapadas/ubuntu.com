@@ -42,22 +42,33 @@
         {{ version.supported.date }}
         {% if version.supported.is_past %}
 					<br />
-          {% include "about/partials/_coverage-chip-standard.html" %}
+          {% if product == "ubuntu" and version.release in ["22.04 LTS", "20.04 LTS"] %}
+            <span class="p-chip--negative is-readonly u-horizontal-negative-nudge">
+              <span class="p-chip__value">No longer maintained</span>
+            </span>
+          {% else %}
+            {% include "about/partials/_coverage-chip-standard.html" %}
+          {% endif %}
         {% endif %}
       </td>
 
       <td>
         <!-- Expanded security maintenance -->
         <p class="p-text--small-caps u-no-margin--bottom">Expanded security maintenance</p>
-        {% if version.pro_supported.date %}
-          <p {% if version.pro_supported.is_past %}class="u-no-margin--bottom"{% endif %}>
-            {{ version.pro_supported.date }}
-          </p>
-          {% if version.pro_supported.is_past %}
-            {% include "about/partials/_coverage-chip-pro.html" %}
+        {% if product == "ubuntu" and version.release in ["22.04 LTS", "20.04 LTS"] %}
+          {{ "Not available" }}
+          <br />
+        {% else %}
+          {% if version.pro_supported.date %}
+            <p {% if version.pro_supported.is_past %}class="u-no-margin--bottom"{% endif %}>
+              {{ version.pro_supported.date }}
+            </p>
+            {% if version.pro_supported.is_past %}
+              {% include "about/partials/_coverage-chip-pro.html" %}
+            {% endif %}
+          {% elif version.pro_supported.notes %}
+            <p>{{ version.pro_supported.notes | capitalize}}</p>
           {% endif %}
-        {% elif version.pro_supported.notes %}
-          <p>{{ version.pro_supported.notes | capitalize}}</p>
         {% endif %}
 
         <!-- Break/bug support -->

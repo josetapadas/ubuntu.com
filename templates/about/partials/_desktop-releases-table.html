@@ -73,25 +73,37 @@
           {{ version.supported.date }}
           {% if version.supported.is_past %}
             <br />
-            {% include "about/partials/_coverage-chip-standard.html" %}
+            {% if product == "ubuntu" and version.release in ["22.04 LTS", "20.04 LTS"] %}
+              <span class="p-chip--negative is-readonly u-horizontal-negative-nudge">
+                <span class="p-chip__value">No longer maintained</span>
+              </span>
+            {% else %}
+              {% include "about/partials/_coverage-chip-standard.html" %}
+            {% endif %}
           {% endif %}
         {% elif version.supported.notes %}
           {{ version.supported.notes | capitalize}}
         {% endif %}
       </td>
-
+      
+      <!-- Expanded security maintenance -->
       <td>
-        {% if version.pro_supported.date %}
-          {{ version.pro_supported.date }}
-          {% if version.pro_supported.is_past %}
-            <br />
-            {% include "about/partials/_coverage-chip-pro.html" %}
+        {% if product == "ubuntu" and version.release in ["22.04 LTS", "20.04 LTS"] %}
+          {{ "Not available" }}
+        {% else %}
+          {% if version.pro_supported.date %}
+            {{ version.pro_supported.date }}
+            {% if version.pro_supported.is_past %}
+              <br />
+              {% include "about/partials/_coverage-chip-pro.html" %}
+            {% endif %}
+          {% elif version.pro_supported.notes %}
+            {{ version.pro_supported.notes | capitalize}}
           {% endif %}
-        {% elif version.pro_supported.notes %}
-          {{ version.pro_supported.notes | capitalize}}
         {% endif %}
       </td>
-
+      
+      <!-- Break/bug support -->
       <td>
         {% if version.pro_supported.date %}
           {{ version.pro_supported.date }}
@@ -104,6 +116,7 @@
         {% endif %}
       </td>
 
+      <!-- Legacy support -->
       <td>
         {% if version.legacy_supported.date %}
           {{ version.legacy_supported.date }}
