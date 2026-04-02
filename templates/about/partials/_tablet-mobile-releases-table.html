@@ -14,9 +14,10 @@
 		</tr>
 	</thead>
 	<tbody>
-  {% set versions_to_display = versions if version == "all" else [selected_version] %}
-
-  {% for version in versions_to_display %}
+    {% set versions_to_display = versions if version == "all" else [selected_version] %}
+    
+    {% for version in versions_to_display %}
+    {% set is_cos_override = product == "ubuntu" and version.release in ["22.04 LTS", "20.04 LTS"] %}
     <tr>
       <td style="overflow: visible;">
         <span class="p-heading--5">
@@ -42,7 +43,7 @@
         {{ version.supported.date }}
         {% if version.supported.is_past %}
 					<br />
-          {% if product == "ubuntu" and version.release in ["22.04 LTS", "20.04 LTS"] %}
+          {% if is_cos_override %}
             <span class="p-chip--negative is-readonly u-horizontal-negative-nudge">
               <span class="p-chip__value">No longer maintained</span>
             </span>
@@ -55,7 +56,7 @@
       <td>
         <!-- Expanded security maintenance -->
         <p class="p-text--small-caps u-no-margin--bottom">Expanded security maintenance</p>
-        {% if product == "ubuntu" and version.release in ["22.04 LTS", "20.04 LTS"] %}
+        {% if is_cos_override %}
           {{ "Not available" }}
           <br />
         {% else %}
