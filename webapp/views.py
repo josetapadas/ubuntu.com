@@ -32,7 +32,6 @@ from canonicalwebteam.directory_parser import generate_sitemap
 from geolite2 import geolite2
 from requests import Session
 from requests.exceptions import HTTPError
-from ubuntu_release_info.data import Data
 from werkzeug.exceptions import BadRequest
 from canonicalwebteam.flask_base.env import get_flask_env
 
@@ -163,9 +162,60 @@ def appliance_install(appliance, device):
     )
 
 
+def ubuntu_release_meta():
+    """
+    Returns the ubuntu releases information.
+    """
+    url_release = "https://changelogs.ubuntu.com/meta-release"
+    url_release_dev = "https://changelogs.ubuntu.com/meta-release-development"
+
+    def parse_meta_url(url):
+        releases = {}
+
+        meta_data = requests.get(url, timeout=5)
+        if not meta_data.ok:
+            raise ValueError(
+                f"Unable to download meta-release data from {url}"
+            )
+
+        for release in meta_data.content.decode("utf-8").split("\n\n"):
+            # use the baseloader to prevent it from munging the version
+            # from a string to some odd integer value
+            release_data = yaml.load(release, Loader=yaml.BaseLoader)
+
+            if (
+                "Version" not in release_data
+                or "Dist" not in release_data
+                or "Name" not in release_data
+            ):
+                continue
+
+            version_id_parts = (
+                release_data["Version"].removesuffix(" LTS").split(".")[:2]
+            )
+            release_data["Version"] = ".".join(version_id_parts)
+            release_data["VersionTuple"] = tuple(
+                int(part) for part in version_id_parts
+            )
+
+            releases[release_data["Dist"]] = release_data
+
+        return releases
+
+    releases = parse_meta_url(url_release)
+    releases_dev = parse_meta_url(url_release_dev)
+    releases.update(releases_dev)
+
+    return releases
+
+
 def releasenotes_redirect():
     """
-    View to redirect to https://wiki.ubuntu.com/ URLs for release notes.
+    View to redirect to release notes document URIs.
+    We use a different behavior depending on the requested version:
+     - Redirect to https://documentation.ubuntu.com/ for 22.04 and all the
+       versions later or equal than 24.04
+     - Redirect to https://wiki.ubuntu.com/ for versions earlier than 22.04.
 
     This used to be done in the Apache frontend, but that is going away
     to be replace by the content-cache.
@@ -173,18 +223,30 @@ def releasenotes_redirect():
     Old apache redirects: https://pastebin.canonical.com/p/3TXyyNkWkg/
     """
 
+    base_uri = "https://documentation.ubuntu.com/release-notes/"
     version = flask.request.args.get("ver", "")[:5]
 
-    for codename, release in Data().releases.items():
-        short_version = ".".join(release.version.split(".")[:2])
-        if version == short_version:
-            release_slug = release.full_codename.replace(" ", "")
+    if not version:
+        return flask.redirect(base_uri)
 
+    try:
+        releases = ubuntu_release_meta()
+    except (ValueError, requests.exceptions.Timeout) as e:
+        sentry_sdk.capture_exception(e)
+        return flask.redirect(base_uri)
+
+    for release in releases.values():
+        if version == release["Version"]:
+            version_tuple = release["VersionTuple"]
+            if version_tuple == (22, 4) or version_tuple >= (24, 4):
+                return flask.redirect(f"{base_uri}{version}/")
+
+            release_slug = release["Name"].replace(" ", "")
             return flask.redirect(
                 f"https://wiki.ubuntu.com/{release_slug}/ReleaseNotes"
             )
 
-    return flask.redirect("https://wiki.ubuntu.com/Releases")
+    return flask.redirect(base_uri)
 
 
 def account_query():
