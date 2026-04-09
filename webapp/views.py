@@ -1103,6 +1103,75 @@ def marketo_submit():
     original_form_id = form_fields.get("formid", 4198)
     enrichment_fields["original_form_id"] = original_form_id
 
+    # Only attach UTM values when the user has consented to
+    # non-essential cookies (functionality, performance, or all)
+    cookie_consent = flask.request.cookies.get("_cookies_accepted", "unset")
+    non_essential_consent = cookie_consent in {
+        "functionality",
+        "performance",
+        "all",
+    }
+
+    utm_keys = {
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_content",
+        "utm_term",
+        "utmcontent",
+    }
+
+    encoded_utms = flask.request.cookies.get("utms") or flask.request.form.get(
+        "utms"
+    )
+    if encoded_utms:
+        form_fields.pop("utms", None)
+        if non_essential_consent:
+            utms = unquote(encoded_utms)
+            utm_dict = dict(i.split(":", 1) for i in utms.split("&"))
+            approved_utms = [
+                "utm_source",
+                "utm_medium",
+                "utm_campaign",
+                "utm_content",
+                "utm_term",
+            ]
+            for k, v in utm_dict.items():
+                if k in approved_utms:
+                    if k == "utm_content":
+                        k = "utmcontent"
+                    enrichment_fields[k] = v
+
+            # Append utm values in acquisition url
+            acquisition_url = enrichment_fields.get("acquisition_url")
+            if acquisition_url:
+                enriched_acquisition_url = enrich_acquisition_url(
+                    acquisition_url, utm_dict, approved_utms
+                )
+                enrichment_fields["acquisition_url"] = enriched_acquisition_url
+
+    if not non_essential_consent:
+        # Strip utm_* keys from form_fields (e.g. hidden inputs)
+        for key in utm_keys:
+            form_fields.pop(key, None)
+
+        # Strip utm_* keys from enrichment_fields
+        for key in utm_keys:
+            enrichment_fields.pop(key, None)
+
+        # Strip utm_* query params from acquisition_url
+        for target in (form_fields, enrichment_fields):
+            acq_url = target.get("acquisition_url")
+            if acq_url:
+                parsed = urlparse(acq_url)
+                params = parse_qs(parsed.query, keep_blank_values=True)
+                cleaned = {
+                    k: v for k, v in params.items() if not k.startswith("utm_")
+                }
+                target["acquisition_url"] = urlunparse(
+                    parsed._replace(query=urlencode(cleaned, doseq=True))
+                )
+
     if "formid" not in form_fields:
         flask.flash(
             "There was a problem submitting your form.",
@@ -1123,34 +1192,6 @@ def marketo_submit():
             }
         ],
     }
-
-    encoded_utms = flask.request.cookies.get("utms") or flask.request.form.get(
-        "utms"
-    )
-    if encoded_utms:
-        form_fields.pop("utms", None)
-        utms = unquote(encoded_utms)
-        utm_dict = dict(i.split(":", 1) for i in utms.split("&"))
-        approved_utms = [
-            "utm_source",
-            "utm_medium",
-            "utm_campaign",
-            "utm_content",
-            "utm_term",
-        ]
-        for k, v in utm_dict.items():
-            if k in approved_utms:
-                if k == "utm_content":
-                    k = "utmcontent"
-                enrichment_fields[k] = v
-
-        # Append utm values in acquisition url
-        acquisition_url = enrichment_fields.get("acquisition_url")
-        if acquisition_url:
-            enriched_acquisition_url = enrich_acquisition_url(
-                acquisition_url, utm_dict, approved_utms
-            )
-            enrichment_fields["acquisition_url"] = enriched_acquisition_url
 
     enriched_payload = {
         "formId": "4198",
