@@ -409,9 +409,9 @@ def cve_index():
         "needed": {"name": "Vulnerable", "icon": "error"},
         "deferred": {"name": "Vulnerable", "icon": "error"},
         "pending": {"name": "Vulnerable", "icon": "error"},
-        "ignored": {"name": "Ignored", "icon": "error-grey"},
+        "ignored": {"name": "Ignored", "icon": "ignored"},
         "released": {"name": "Fixed", "icon": "success"},
-        "vulnerable": {"name": "Vulnerable", "icon": "error"},
+        "vulnerable": {"name": "Vulnerable", "icon": "vulnerable"},
     }
 
     cves = []
