@@ -494,7 +494,7 @@
     ) -%}
   {%- endcall -%}
 
-  {{- vf_basic_section(title={"text": "Take the next step<br />towards STIG compliance"},
+  {{- vf_basic_section(title={"text": 'Take the next step<br class="u-hide--small u-hide--medium" />towards STIG compliance'},
     items=[
     {
     "type": "description",
@@ -543,7 +543,7 @@
     }
     ]) -}}
 
-  {{ vf_blog(title={"text": "Latest from our blog"},
+  {{ vf_blog(title={"text": "Latest from our blog"}, padding="deep",
     template_config={"enabled": True, "template_container_id": "disa-stig-articles"},) }}
 
   <script type="module" src="/static/js/modules/vanilla-framework/js/tabs.js"></script>
