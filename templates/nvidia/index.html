@@ -21,13 +21,14 @@
   {% call(slot) vf_hero(
     title_text='Adopt AI across the enterprise <br class="u-hide--small" /> with Canonical and NVIDIA',
     layout='50/50',
+    is_split_on_medium=true,
     blocks=[
     {
     "type": "description",
     "padding": "shallow",
     "item": {
     "type": "text",
-    "content": "The publishers of the most popular open-source OS meet the global innovators in AI. We put the future in your hands."
+    "content": "The publishers of the most popular open source OS meet the global innovators in AI. We put the future in your hands."
     }
     },
     {
@@ -39,7 +40,9 @@
     "attrs": {
     "href": "/contact-us",
     "class": "js-invoke-modal",
-    "aria-controls": "contact-modal"}},}},{
+    "aria-controls": "contact-modal"}},}
+    },
+    {
     "type": "image",
     "item": {
     "aspect_ratio": "3-2",
@@ -59,7 +62,8 @@
     ) -%}
   {% endcall -%}
 
-  {{ vf_basic_section(title={"text": 'Turnkey AI solutions for the <br class="u-hide--small" /> enterprise powered by Canonical <br class="u-hide--small" /> and NVIDIA'},
+  {{ vf_basic_section(title={"text": 'Turnkey AI solutions for the <br class="u-hide--small u-hide--medium" /> enterprise powered by Canonical <br class="u-hide--small u-hide--medium" /> and NVIDIA'},
+    is_split_on_medium=true,
     items=[
     {
     "type": "image",
@@ -167,7 +171,7 @@
     {%- endif -%}
   {% endcall -%}
 
-  {%- call(slot) vf_tiered_list(is_description_full_width_on_desktop=false, is_list_full_width_on_tablet=true) -%}
+  {%- call(slot) vf_tiered_list(is_description_full_width_on_desktop=false, is_list_full_width_on_tablet=false) -%}
     {%- if slot == 'title' -%}
       <h2 id="ai-from-concept-to-production">Take AI from concept to production effortlessly</h2>
     {%- endif -%}
@@ -195,21 +199,21 @@
           }}
         </div>
       </section>
-      <div class="p-cta-block">
+      <p>
         <a href="/kubernetes/charmed-k8s">Learn more for Charmed Kubernetes &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://microk8s.io/resources?_ga=2.63950252.208025466.1654521646-1680362023.1652798743">Explore MicroK8s &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://www.nvidia.com/dgx-mlops">Check out certified MLOps software for NVIDIA DGX systems &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="/engage/kubernetes-by-canonical-delivered-on-nvidia-dgx-systems">Download the solution brief: Kubernetes by Canonical delivered on NVIDIA DGX systems &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="/blog/canonical-kubernetes-enhances-ai-ml-development-capabilities-with-nvidia-integrations">Canonical Kubernetes enhances AI/ML development capabilities with NVIDIA integrations &rsaquo;</a>
-      </div>
+      </p>
     {%- endif -%}
     {%- if slot == 'list_item_title_2' -%}
       <h3 class="p-heading--5">Take the fast track with certified hardware</h3>
@@ -245,12 +249,12 @@
         <li>NVIDIA ConnectX network adapters</li>
       </ul>
       <hr class="p-rule--muted" />
-      <div class="p-cta-block">
+      <p>
         <a href="/certified/servers">Check Ubuntu certified servers &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="/certified/desktops">Check Ubuntu certified desktops &rsaquo;</a>
-      </div>
+      </p>
     {%- endif -%}
     {%- if slot == 'list_item_title_3' -%}
       <h3 class="p-heading--5">Get enterprise-grade support and software maintenance</h3>
@@ -261,7 +265,7 @@
         End-to-end customer support is available when you need it for all Canonical software backed by NVIDIA across all NVIDIA hardware platforms. New Ubuntu releases are made available like clockwork with Canonical’s periodic <a href="/about/release-cycle">release cycle</a>. Ubuntu’s reliable maintenance cycle, with updates every 3-5 weeks fosters trust across the community.
       </p>
       <p>
-        <a href="/support">Learn more about enterprise open-source support &rsaquo;</a>
+        <a href="/support">Learn more about enterprise open source support &rsaquo;</a>
       </p>
     {%- endif -%}
   {%- endcall -%}
@@ -303,12 +307,12 @@
       </ul>
 
       <hr class="p-rule--muted" />
-      <div class="p-cta-block">
+      <p>
         <a href="https://www.nvidia.com/en-us/gpu-cloud/">Learn more about NVIDIA NGC &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://www.nvidia.com/en-us/data-center/products/ai-enterprise/">Explore NVIDIA AI Enterprise &rsaquo;</a>
-      </div>
+      </p>
 
     {%- endif -%}
 
@@ -345,21 +349,21 @@
       </ul>
 
       <hr class="p-rule--muted" />
-      <div class="p-cta-block">
+      <p>
         <a href="https://www.nvidia.com/en-us/networking/products/data-processing-unit/">Learn more about NVIDIA BlueField &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://docs.nvidia.com/networking/display/BlueFieldSWv31011424/Installing+Popular+Linux+Distributions+on+BlueField#InstallingPopularLinuxDistributionsonBlueField-UbuntuInstallationInstallingUbuntuonBlueField">Install Ubuntu on BlueField &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="/blog/ai-based-cybersecurity-with-canonical-ubuntu-and-bluefield-2-dpu">Read the blog: Security at the Edge: hardware accelerated AI-based cybersecurity with Canonical Ubuntu and the BlueField-2 DPU &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://docs.nvidia.com/networking/display/SOL/RDG+for+Canonical+Charmed+OpenStack+with+NVIDIA+Networking+and+Accelerated+OVN+for+High+Performance+Workloads">Read the reference deployment guide: RDG for Canonical Charmed OpenStack with NVIDIA Networking and Accelerated OVN for High Performance Workloads &rsaquo;</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://www.nvidia.com/en-us/networking/data-center-transformation-with-bluefield-dpus/">Read the e-book: Modernize Your Data Center with Accelerated Networking &rsaquo;</a>
-      </div>
+      </p>
     {%- endif -%}
 
     {%- if slot == 'list_item_title_3' -%}
@@ -434,30 +438,29 @@
       <p>The Charmed Kubeflow solution integrates and operates seamlessly across multiple cloud and on-prem platforms.</p>
 
       <hr class="p-rule--muted" />
-      <div class="p-cta-block">
+      <p>
         <a href="/ai/services">Explore Automated ML workflows with Charmed Kubeflow</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://canonical.com/blog/scale-enterprise-ai-with-canonical-and-nvidia">Charmed Kubeflow is now certified in the NVIDIA DGX-Ready Software Program for MLOps</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="/engage/kubeflow-nvidia-dgx-webinar?_ga=2.173237093.778568722.1680051597-1310552537.1650462715">On-demand webinar: How Canonical and NVIDIA can help operationalize your AI models quickly</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://pages.ubuntu.com/rs/066-EOV-335/images/NVIDIA_DGX_Kubeflow_solution_06_03_23.pdf">Solution brief: Charmed Kubeflow delivered on NVIDIA DGX systems</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="/engage/run-ai-at-scale">Whitepaper: Run AI at Scale - Build Your Performant ML Stack with NVIDIA DGX and Kubeflow</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://pages.ubuntu.com/rs/066-EOV-335/images/EGX_MicroK8s_Kubeflow_Reference_Architecture.pdf">Reference architecture: Run AI at the Edge: Use MicroK8s with Charmed Kubeflow on NVIDIA EGX platform</a>
-      </div>
-      <div class="p-cta-block">
+      </p>
+      <p>
         <a href="https://charmed-kubeflow.io/">Learn more about Charmed Kubeflow - the fully supported MLOps platform for any cloud</a>
-      </div>
+      </p>
     {%- endif -%}
   {%- endcall -%}
-
 
   {#
     TODO: move id to the title block once the template is updated
@@ -467,6 +470,8 @@
   {{ vf_divided_section(title={
     "text": "NVIDIA DRIVE"
     },
+    is_split_on_medium=true,
+    padding="deep",
     blocks=[
     {
     "type": "description-block",
