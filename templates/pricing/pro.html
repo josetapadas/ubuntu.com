@@ -372,4 +372,6 @@ layout='50/50'
   enterpriseTab.addEventListener('click', toggleEnterpriseSupport);
 </script>
 
+  {{ load_form("/pricing/pro") | safe }}
+
 {% endblock %}
