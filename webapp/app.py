@@ -238,6 +238,7 @@ app = FlaskBase(
     static_folder="../static",
 )
 
+
 # Markdown endpoint for LLM/crawler optimization
 # Serves any page as Markdown via ?format=md query parameter
 MarkdownResponse(app)
