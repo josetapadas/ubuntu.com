@@ -3,6 +3,7 @@
 {% from "_macros/vf_basic-section.jinja" import vf_basic_section %}
 {% from "_macros/vf_divided-section.jinja" import vf_divided_section %}
 {% from "_macros/vf_hero.jinja" import vf_hero %}
+{% from "_macros/vf_logo-section.jinja" import vf_logo_section %}
 {% from "_macros/vf_quote-wrapper.jinja" import vf_quote_wrapper %}
 {% from "_macros/vf_tiered-list.jinja" import vf_tiered_list %}
 
@@ -67,6 +68,7 @@
     items=[
     {
     "type": "image",
+    "padding": "shallow",
     "item": {
     "aspect_ratio": "16-9",
     "attrs": image(url="https://assets.ubuntu.com/v1/149e1bcd-turnkey_ai_solutions.jpg",
@@ -119,7 +121,7 @@
     {%- endif -%}
 
     {%- if slot == 'list_item_description_2' -%}
-      <ul class="p-list--divided-bulleted">
+      <ul class="p-list--divided-bulleted u-no-margin--bottom">
         <li class="p-list__item">An enterprise-ready OS with unparalleled security</li>
         <li class="p-list__item">Loved by developers and data scientists</li>
         <li class="p-list__item">Unified experience from cloud to IoT</li>
@@ -212,7 +214,7 @@
         <a href="/engage/kubernetes-by-canonical-delivered-on-nvidia-dgx-systems">Download the solution brief: Kubernetes by Canonical delivered on NVIDIA DGX systems &rsaquo;</a>
       </p>
       <p>
-        <a href="/blog/canonical-kubernetes-enhances-ai-ml-development-capabilities-with-nvidia-integrations">Canonical Kubernetes enhances AI/ML development capabilities with NVIDIA integrations &rsaquo;</a>
+        <a href="/blog/canonical-kubernetes-enhances-ai-ml-development-capabilities-with-nvidia-integrations">Read the blog: Canonical Kubernetes enhances AI/ML development capabilities with NVIDIA integrations &rsaquo;</a>
       </p>
     {%- endif -%}
     {%- if slot == 'list_item_title_2' -%}
@@ -220,33 +222,41 @@
     {%- endif -%}
 
     {%- if slot == 'list_item_description_2' -%}
-      <div class="p-logo-section">
-        <div class="p-logo-section__items">
-          <div class="p-logo-section__item">
-            {{ image(url="https://assets.ubuntu.com/v1/5183618c-ubuntu_certified_logo.png",
-                        alt="Ubuntu certified logo",
-                        width="183",
-                        height="312",
-                        hi_def=True,
-                        loading="lazy",
-                        attrs={"class": "p-logo-section__logo"}) | safe
-            }}
-          </div>
-        </div>
-      </div>
+      {% call(slot) vf_logo_section(
+        title={},
+        mode="minimal",
+        padding="none",
+        blocks=[
+        {
+        "type": "logo-block",
+        "item": {
+        "logos": [
+        {
+        "src": "https://assets.ubuntu.com/v1/5183618c-ubuntu_certified_logo.png",
+        "alt": "Ubuntu certified logo",
+        "width": "183",
+        "height": "312",
+        "loading": "lazy"
+        }
+        ]
+        }
+        }
+        ]
+        ) %}
+      {% endcall %}
       <p>
         Get peace of mind with Ubuntu certified hardware from all major OEMs. Choosing validated platforms significantly reduces deployment time and costs for end-customers, in addition to improving reliability and providing bug-fixes faster.
       </p>
       <p>
         Combined with NVIDIA DGX systems or NVIDIA-Certified systems, choosing an Ubuntu-certified platform provides secure, performant hardware that is guaranteed to deploy quickly and run smoothly.
       </p>
-      <ul>
-        <li>NVIDIA DGX systems</li>
-        <li>NVIDIA certified servers</li>
-        <li>Data-science workstations</li>
-        <li>NVIDIA GPUs</li>
-        <li>NVIDIA BlueField DPUs</li>
-        <li>NVIDIA ConnectX network adapters</li>
+      <ul class="p-list--divided-bulleted">
+        <li class="p-list__item">NVIDIA DGX systems</li>
+        <li class="p-list__item">NVIDIA certified servers</li>
+        <li class="p-list__item">Data-science workstations</li>
+        <li class="p-list__item">NVIDIA GPUs</li>
+        <li class="p-list__item">NVIDIA BlueField DPUs</li>
+        <li class="p-list__item">NVIDIA ConnectX network adapters</li>
       </ul>
       <hr class="p-rule--muted" />
       <p>
@@ -289,21 +299,21 @@
 
       <hr class="p-rule--muted" />
       <strong>NVIDIA</strong>
-      <ul>
-        <li>Unmatched hardware performance</li>
-        <li>NVIDIA AI Enterprise for AI and data analytics</li>
-        <li>Global enterprise support</li>
-        <li>Extensive catalogue of ready-to-use containers</li>
+      <ul class="p-list--divided-bulleted">
+        <li class="p-list__item">Unmatched hardware performance</li>
+        <li class="p-list__item">NVIDIA AI Enterprise for AI and data analytics</li>
+        <li class="p-list__item">Global enterprise support</li>
+        <li class="p-list__item">Extensive catalogue of ready-to-use containers</li>
       </ul>
 
       <hr class="p-rule--muted" />
       <strong>Canonical</strong>
-      <ul>
-        <li>Native vGPU integrations</li>
-        <li>MIG support</li>
-        <li>Hardened, conformant multi-cloud Kubernetes</li>
-        <li>Leaders in Openstack deployments</li>
-        <li>MLOps simplified with Kubeflow</li>
+      <ul class="p-list--divided-bulleted">
+        <li class="p-list__item">Native vGPU integrations</li>
+        <li class="p-list__item">MIG support</li>
+        <li class="p-list__item">Hardened, conformant multi-cloud Kubernetes</li>
+        <li class="p-list__item">Leaders in Openstack deployments</li>
+        <li class="p-list__item">MLOps simplified with Kubeflow</li>
       </ul>
 
       <hr class="p-rule--muted" />
@@ -317,35 +327,43 @@
     {%- endif -%}
 
     {%- if slot == 'list_item_title_2' -%}
-      <h3 class="p-heading--5">Performance and efficiency in an heterogeneous world</h3>
+      <h3 class="p-heading--5">Performance and efficiency in a heterogeneous world</h3>
     {%- endif -%}
 
     {%- if slot == 'list_item_description_2' -%}
-      <div class="p-logo-section">
-        <div class="p-logo-section__items">
-          <div class="p-logo-section__item">
-            {{ image(url="https://assets.ubuntu.com/v1/c05ee365-kubeflow_logo.png",
-                        alt="Charmed Kubeflow logo",
-                        width="306",
-                        height="312",
-                        hi_def=True,
-                        loading="lazy",
-                        attrs={"class": "p-logo-section__logo"}) | safe
-            }}
-          </div>
-        </div>
-      </div>
+      {% call(slot) vf_logo_section(
+        title={},
+        mode="minimal",
+        padding="none",
+        blocks=[
+        {
+        "type": "logo-block",
+        "item": {
+        "logos": [
+        {
+        "src": "https://assets.ubuntu.com/v1/c05ee365-kubeflow_logo.png",
+        "alt": "Charmed Kubeflow logo",
+        "width": "306",
+        "height": "312",
+        "loading": "lazy"
+        }
+        ]
+        }
+        }
+        ]
+        ) %}
+      {% endcall %}
       <p>
         The ever-evolving landscape that is driving massive increases in virtualization and network traffic necessitates a modern approach to infrastructure operations. The NVIDIA BlueField data processing unit (DPU) ignites unprecedented innovation by offloading, accelerating, and isolating a broad range of advanced networking, storage, and security services, enabling BlueField DPUs to provide a secure and accelerated infrastructure from cloud to data center to edge.
       </p>
       <p>
-        Through Mellanox’s acquisition by NVIDIA, we have delivered a first-class optimized Ubuntu to every generation of the NVIDIA Bluefield DPUs, which are critical elements of NVIDIA’s AI offerings.
+        Through Mellanox’s acquisition by NVIDIA, we have delivered a first-class optimized Ubuntu to every generation of the NVIDIA BlueField DPUs, which are critical elements of NVIDIA’s AI offerings.
       </p>
-      <strong>Ubuntu and Bluefield</strong>
-      <ul>
-        <li>First OS to be certified, since 2018</li>
-        <li>OVN integrations for offload on to DPU</li>
-        <li>Native Ubuntu kernel support for MOFED for ConnectX NICs (with planned DPU support)</li>
+      <strong>Ubuntu and BlueField</strong>
+      <ul class="p-list--divided-bulleted">
+        <li class="p-list__item">First OS to be certified, since 2018</li>
+        <li class="p-list__item">OVN integrations for offload on to DPU</li>
+        <li class="p-list__item">Native Ubuntu kernel support for MOFED for ConnectX NICs (with planned DPU support)</li>
       </ul>
 
       <hr class="p-rule--muted" />
@@ -371,64 +389,63 @@
     {%- endif -%}
 
     {%- if slot == 'list_item_description_3' -%}
-      <div class="p-logo-section">
-        <div class="p-logo-section__items">
-          <div class="p-logo-section__item">
-            {{ image(url="https://assets.ubuntu.com/v1/312231d8-openstack_logo.png",
-                        alt="OpenStack logo",
-                        width="132",
-                        height="100",
-                        hi_def=True,
-                        loading="lazy") | safe
-            }}
-          </div>
-          <div class="p-logo-section__item">
-            {{ image(url="https://assets.ubuntu.com/v1/0e122394-kubernetes_logomark_logo.png",
-                        alt="Kubernetes logo",
-                        width="160",
-                        height="100",
-                        hi_def=True,
-                        loading="lazy") | safe
-            }}
-          </div>
-          <div class="p-logo-section__item">
-            {{ image(url="https://assets.ubuntu.com/v1/b918fe24-aws_logo.png",
-                        alt="AWS logo",
-                        width="48",
-                        height="100",
-                        hi_def=True,
-                        loading="lazy") | safe
-            }}
-          </div>
-          <div class="p-logo-section__item">
-            {{ image(url="https://assets.ubuntu.com/v1/28175685-google_cloud_logo.png",
-                        alt="Google Cloud logo",
-                        width="118",
-                        height="100",
-                        hi_def=True,
-                        loading="lazy") | safe
-            }}
-          </div>
-          <div class="p-logo-section__item">
-            {{ image(url="https://assets.ubuntu.com/v1/655ecd38-microsoft_azure_logo.png",
-                        alt="Microsoft Azure logo",
-                        width="87",
-                        height="100",
-                        hi_def=True,
-                        loading="lazy") | safe
-            }}
-          </div>
-          <div class="p-logo-section__item">
-            {{ image(url="https://assets.ubuntu.com/v1/cf4bde95-vmware_logo.png",
-                        alt="VMware logo",
-                        width="103",
-                        height="100",
-                        hi_def=True,
-                        loading="lazy") | safe
-            }}
-          </div>
-        </div>
-      </div>
+      {% call(slot) vf_logo_section(
+        title={},
+        mode="minimal",
+        padding="none",
+        blocks=[
+        {
+        "type": "logo-block",
+        "item": {
+        "logos": [
+        {
+        "src": "https://assets.ubuntu.com/v1/312231d8-openstack_logo.png",
+        "alt": "OpenStack logo",
+        "width": "132",
+        "height": "100",
+        "loading": "lazy"
+        },
+        {
+        "src": "https://assets.ubuntu.com/v1/0e122394-kubernetes_logomark_logo.png",
+        "alt": "Kubernetes logo",
+        "width": "160",
+        "height": "100",
+        "loading": "lazy"
+        },
+        {
+        "src": "https://assets.ubuntu.com/v1/b918fe24-aws_logo.png",
+        "alt": "AWS logo",
+        "width": "48",
+        "height": "100",
+        "loading": "lazy"
+        },
+        {
+        "src": "https://assets.ubuntu.com/v1/28175685-google_cloud_logo.png",
+        "alt": "Google Cloud logo",
+        "width": "118",
+        "height": "100",
+        "loading": "lazy"
+        },
+        {
+        "src": "https://assets.ubuntu.com/v1/655ecd38-microsoft_azure_logo.png",
+        "alt": "Microsoft Azure logo",
+        "width": "87",
+        "height": "100",
+        "loading": "lazy"
+        },
+        {
+        "src": "https://assets.ubuntu.com/v1/cf4bde95-vmware_logo.png",
+        "alt": "VMware logo",
+        "width": "103",
+        "height": "100",
+        "loading": "lazy"
+        }
+        ]
+        }
+        }
+        ]
+        ) %}
+      {% endcall %}
       <p>
         Standardizing operations using ML workflows can significantly improve time-to-market and reduce the costs associated with your AI solutions. <a href="https://charmed-kubeflow.io/">Charmed Kubeflow</a>, an open source machine learning platform built for Kubernetes, provides a unified environment where data scientists and data engineers can collaborate.
       </p>
@@ -439,25 +456,25 @@
 
       <hr class="p-rule--muted" />
       <p>
-        <a href="/ai/services">Explore Automated ML workflows with Charmed Kubeflow</a>
+        <a href="/ai/services">Explore Automated ML workflows with Charmed Kubeflow &rsaquo;</a>
       </p>
       <p>
-        <a href="https://canonical.com/blog/scale-enterprise-ai-with-canonical-and-nvidia">Charmed Kubeflow is now certified in the NVIDIA DGX-Ready Software Program for MLOps</a>
+        <a href="https://canonical.com/blog/scale-enterprise-ai-with-canonical-and-nvidia">Charmed Kubeflow is now certified in the NVIDIA DGX-Ready Software Program for MLOps &rsaquo;</a>
       </p>
       <p>
-        <a href="/engage/kubeflow-nvidia-dgx-webinar?_ga=2.173237093.778568722.1680051597-1310552537.1650462715">On-demand webinar: How Canonical and NVIDIA can help operationalize your AI models quickly</a>
+        <a href="/engage/kubeflow-nvidia-dgx-webinar?_ga=2.173237093.778568722.1680051597-1310552537.1650462715">On-demand webinar: How Canonical and NVIDIA can help operationalize your AI models quickly &rsaquo;</a>
       </p>
       <p>
-        <a href="https://pages.ubuntu.com/rs/066-EOV-335/images/NVIDIA_DGX_Kubeflow_solution_06_03_23.pdf">Solution brief: Charmed Kubeflow delivered on NVIDIA DGX systems</a>
+        <a href="https://pages.ubuntu.com/rs/066-EOV-335/images/NVIDIA_DGX_Kubeflow_solution_06_03_23.pdf">Solution brief: Charmed Kubeflow delivered on NVIDIA DGX systems &rsaquo;</a>
       </p>
       <p>
-        <a href="/engage/run-ai-at-scale">Whitepaper: Run AI at Scale - Build Your Performant ML Stack with NVIDIA DGX and Kubeflow</a>
+        <a href="/engage/run-ai-at-scale">Whitepaper: Run AI at Scale - Build Your Performant ML Stack with NVIDIA DGX and Kubeflow &rsaquo;</a>
       </p>
       <p>
-        <a href="https://pages.ubuntu.com/rs/066-EOV-335/images/EGX_MicroK8s_Kubeflow_Reference_Architecture.pdf">Reference architecture: Run AI at the Edge: Use MicroK8s with Charmed Kubeflow on NVIDIA EGX platform</a>
+        <a href="https://pages.ubuntu.com/rs/066-EOV-335/images/EGX_MicroK8s_Kubeflow_Reference_Architecture.pdf">Reference architecture: Run AI at the Edge: Use MicroK8s with Charmed Kubeflow on NVIDIA EGX platform &rsaquo;</a>
       </p>
       <p>
-        <a href="https://charmed-kubeflow.io/">Learn more about Charmed Kubeflow - the fully supported MLOps platform for any cloud</a>
+        <a href="https://charmed-kubeflow.io/">Learn more about Charmed Kubeflow - the fully supported MLOps platform for any cloud &rsaquo;</a>
       </p>
     {%- endif -%}
   {%- endcall -%}
@@ -496,7 +513,7 @@
   "item": {
   "type": "html",
   "content": "
-  <h3 class=\"p-heading--5\">Ubuntu is the open source software foundation for NVIDIA DRIVE®.</h3>
+  <h3 class=\"p-heading--5\">Ubuntu is the open source software foundation for NVIDIA DRIVE&reg;.</h3>
 
   <p>Canonical provides the production-grade Linux for NVIDIA DRIVE platforms. Ubuntu delivers a secure, maintained and widely adopted software environment that enables software-defined vehicle developers to deploy immersive experiences and autonomous driving applications at scale.</p>"}},
   ]},
