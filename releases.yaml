@@ -71,6 +71,8 @@ checksums:
     "22.04.5": "bfd1cee02bc4f35db939e69b934ba49a39a378797ce9aee20f6e3e3e728fefbf *ubuntu-22.04.5-desktop-amd64.iso"
     "21.10": "f8d3ab0faeaecb5d26628ae1aa21c9a13e0a242c381aa08157db8624d574b830 *ubuntu-21.10-desktop-amd64.iso"
     "20.04.6": "510ce77afcb9537f198bc7daa0e5b503b6e67aaed68146943c231baeaab94df1 *ubuntu-20.04.6-desktop-amd64.iso"
+  desktop-arm64:
+    "25.10": "9d383dd57220dec520fdec3be05da258d27d435c02fe6e296c5d0a505741a787 *ubuntu-25.10-desktop-arm64.iso"
   live-server:
     "25.10": "dc54870e5261c0abad19f74b8146659d10e625971792bd42d7ecde820b60a1d0 *ubuntu-25.10-live-server-amd64.iso"
     "25.04": "8b44046211118639c673335a80359f4b3f0d9e52c33fe61c59072b1b61bdecc5 *ubuntu-25.04-live-server-amd64.iso"
@@ -80,6 +82,9 @@ checksums:
     "21.10": "e84f546dfc6743f24e8b1e15db9cc2d2c698ec57d9adfb852971772d1ce692d4 *ubuntu-21.10-live-server-amd64.iso"
     "20.04.6": "b8f31413336b9393ad5d8ef0282717b2ab19f007df2e9ed5196c13d8f9153c8b *ubuntu-20.04.6-live-server-amd64.iso"
     "18.04.6": "6c647b1ab4318e8c560d5748f908e108be654bad1e165f7cf4f3c1fc43995934 *ubuntu-18.04.6-live-server-amd64.iso"
+  live-server-arm64:
+    "25.10": "ecf579664c0be9e4a68ae7b617399ce943c2dee49eb1fcc6702a5671a4f88320 *ubuntu-25.10-live-server-arm64.iso"
+    "24.04.4": "9a6ce6d7e66c8abed24d24944570a495caca80b3b0007df02818e13829f27f32 *ubuntu-24.04.4-live-server-arm64.iso"
   desktop-arm64+raspi:
     "25.10": "d35bc2aa6ed256293c4eab4d6066274364ddc790d327bb1ec1bfac117ec89dd3 *ubuntu-25.10-preinstalled-desktop-arm64+raspi.img.xz"
     "25.04": "278b1748c783a69edb526e7e29d51b4e55f505a1dcddcc8be3977df5b8d87088 *ubuntu-25.04-preinstalled-desktop-arm64+raspi.img.xz"
@@ -117,3 +122,5 @@ checksums:
     "22": "4c4b3958626611aff85bfa5873c45ad22fdf7642be868b5722900fa88e6fca86 *ubuntu-core-22-armhf+raspi.img.xz"
   wsl:
     "24.04.4": "9b2f7730dc68227dd04a9f3e5eab86ad85caf556b8606ad94f1f29ff5c4fd3f5 *ubuntu-24.04.4-wsl-amd64.wsl"
+  wsl-arm64:
+    "24.04.4": "6b244d89f412a68f51e58f396fab65bed3b5896a25c045a99bef9c78a07df507 *ubuntu-24.04.4-wsl-arm64.wsl"
