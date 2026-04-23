@@ -77,7 +77,7 @@
             </div>
             <div class="col-3">
               <a class="p-button"
-                 href="https://cdimage.ubuntu.com/releases/{{ releases_yaml.lts.full_version }}/release/ubuntu-{{ releases_yaml.lts.full_version }}-desktop-arm64.iso"
+                 href="/download/desktop/thank-you?version={{ releases_yaml.lts.full_version }}&amp;architecture=arm64&amp;lts=true"
                  onclick="dataLayer.push({'event' : 'GAEvent', 'eventCategory' : 'Download', 'eventAction' : 'Desktop', 'eventLabel' : '{{ releases_yaml.lts.short_version }}', 'eventValue' : undefined });"
                  aria-label="Download Ubuntu {{ releases_yaml.lts.full_version }} arm64">Download</a>
               {% if releases_yaml.lts.arm_iso_download_size %}
@@ -240,7 +240,7 @@
               </div>
               <div class="col-3">
                 <a class="p-button"
-                   href="https://cdimage.ubuntu.com/releases/{{ releases_yaml.latest.full_version }}/release/ubuntu-{{ releases_yaml.latest.full_version }}-desktop-arm64.iso"
+                   href="/download/desktop/thank-you?version={{ releases_yaml.latest.full_version }}&amp;architecture=arm64"
                    onclick="dataLayer.push({'event' : 'GAEvent', 'eventCategory' : 'Download', 'eventAction' : 'Desktop', 'eventLabel' : '{{ releases_yaml.latest.short_version }}', 'eventValue' : undefined });"
                    aria-label="Download Ubuntu {{ releases_yaml.latest.full_version }} arm64">Download</a>
                 {% if releases_yaml.latest.arm_iso_download_size %}
