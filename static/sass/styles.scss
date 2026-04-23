@@ -1098,7 +1098,15 @@ hr.p-separator.is-shallow {
   .p-img-cta__image {
     @extend %vf-strip;
 
+    height: 300px;
+    width: 100%;
+    object-fit: contain;
+    padding: 1rem;
     background-color: $color-light;
+
+    @media (max-width: $threshold-6-12-col) {
+      height: 150px;
+    }
   }
 
   &:hover {
