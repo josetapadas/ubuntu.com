@@ -1,4 +1,5 @@
 {% extends "download/_base_download.html" %}
+{% from "_macros/vf_cta-section.jinja" import vf_cta_section %}
 
 {% block title %}Download Partner-built Ubuntu for RISC-V Platforms{% endblock %}
 
@@ -117,17 +118,20 @@
     </div>
   </section>
 
-  <hr class="p-rule is-fixed-width" />
-
-  <section class="p-strip is-deep">
-    <div class="u-fixed-width">
-      <p class="p-heading--2">
-        Don’t see your platform?
-        <br />
-        Find more Ubuntu images built and hosted by Canonical <a href="/download/risc-v/canonical-built">here&nbsp;&rsaquo;</a>
-      </p>
-    </div>
-  </section>
+{% call(slot) vf_cta_section(
+    variant='default',
+    layout='100',
+    blocks=[
+      {
+        "type": "cta",
+        "item": {
+          "type": "html",
+          "content": 'Don’t see your platform?<br /> Find more Ubuntu images built and hosted by Canonical <a href="/download/risc-v/canonical-built">here&nbsp;&rsaquo;</a>'
+        }
+      }
+    ]
+  ) -%}
+{% endcall -%}
 
   {{ load_form("/download/risc-v/partner-built") | safe }}
 
