@@ -3,6 +3,8 @@ latest:
   name: "Resolute Raccoon"
   short_version: "26.04"
   full_version: "26.04"
+  desktop_version: "26.04"
+  core_version: "24"
   release_date: "April 2026"
   eol: "April 2031"
   release_notes_url: "https://documentation.ubuntu.com/release-notes/26.04/"
@@ -17,6 +19,7 @@ latest:
   arm_server_iso_size: "2.9GB"
   raspi_desktop_iso_size: "2.6GB"
   raspi_server_iso_size: "1.1GB"
+  rasp_pi_core_24_size: "314MB"
 lts:
   slug: ResoluteRaccoon
   name: "Resolute Raccoon"
